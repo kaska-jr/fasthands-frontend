@@ -4,9 +4,12 @@ import { NavLink } from "react-router-dom";
 import { useCreateUser } from "../../services/mutation";
 import { Loader2 } from "lucide-react";
 import { useAuthContext } from "../../context";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 function Register() {
   const { makeDecision, userType } = useAuthContext();
+
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [user, setUser] = useState({
     username: "",
@@ -48,6 +51,7 @@ function Register() {
               <form
                 className="w-full h-[90%] flex flex-col gap-3 md:gap-2 justify-around items-center text-white"
                 onSubmit={handleRegister}
+                autocomplete="off"
               >
                 <div className="w-[100%] flex flex-col">
                   <label htmlFor="name">
@@ -57,13 +61,15 @@ function Register() {
                     type="text"
                     id="username"
                     name="username"
+                    autocomplete="off"
                     onChange={(e) =>
                       setUser({ ...user, username: e.target.value })
                     }
                     value={user.username}
-                    className="border-b border-white outline-none bg-transparent"
+                    className="border-b border-white outline-none bg-transparent autofill:!bg-transparent py-2"
                   />
                 </div>
+
                 <div className="w-[100%] flex flex-col">
                   <label htmlFor="email">
                     Email:<span className="text-red-600">*</span>
@@ -71,12 +77,13 @@ function Register() {
                   <input
                     type="email"
                     id="email"
+                    autocomplete="off"
                     name="email"
                     value={user.email}
                     onChange={(e) =>
                       setUser({ ...user, email: e.target.value })
                     }
-                    className="border-b border-white outline-none bg-transparent"
+                    className="border-b border-white outline-none bg-transparent autofill:bg-transparent py-2"
                     placeholder="example@gmail.com"
                   />
                 </div>
@@ -106,16 +113,30 @@ function Register() {
                   <label htmlFor="password">
                     Password:<span className="text-red-600">*</span>
                   </label>
-                  <input
-                    type="text"
-                    id="password"
-                    name="password"
-                    onChange={(e) =>
-                      setUser({ ...user, password: e.target.value })
-                    }
-                    value={user.password}
-                    className="border-b border-white outline-none bg-transparent"
-                  />
+                  <div className="relative">
+                    <input
+                      type={isPasswordVisible ? "text" : "password"}
+                      id="password"
+                      autocomplete="off"
+                      name="password"
+                      onChange={(e) =>
+                        setUser({ ...user, password: e.target.value })
+                      }
+                      value={user.password}
+                      className="border-b border-white outline-none bg-transparent w-full autofill:bg-transparent py-2"
+                    />
+                    {isPasswordVisible ? (
+                      <FaRegEyeSlash
+                        className="absolute top-1/2 right-2 -translate-y-1/2 text-skyBlue900 cursor-pointer text-xl"
+                        onClick={() => setIsPasswordVisible(false)}
+                      />
+                    ) : (
+                      <FaRegEye
+                        className="absolute top-1/2 right-2 -translate-y-1/2 text-skyBlue900 cursor-pointer text-xl"
+                        onClick={() => setIsPasswordVisible(true)}
+                      />
+                    )}
+                  </div>
                 </div>
 
                 <div className=" max-w-md mx-auto flex mt-5 flex-col gap-2 w-full">

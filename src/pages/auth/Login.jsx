@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/images/Logo.png";
-import { FaInstagram, FaTwitter } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaRegEye,
+  FaRegEyeSlash,
+  FaTwitter,
+} from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineFacebook } from "react-icons/md";
@@ -9,6 +14,8 @@ import { useAuthContext } from "../../context";
 import { Loader2 } from "lucide-react";
 
 function Login() {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
   const { isLoggedIn } = useAuthContext();
 
   if (isLoggedIn) {
@@ -61,7 +68,7 @@ function Login() {
                     onChange={(e) =>
                       setUser({ ...user, username: e.target.value })
                     }
-                    className="border-b border-black text-lg outline-none bg-white dark:bg-bg-white focus-within:bg-white focus-visible:bg-white"
+                    className="border-b border-black text-lg outline-none bg-white dark:bg-bg-white focus-within:bg-white focus-visible:bg-white py-2"
                   />
                 </div>
 
@@ -69,16 +76,31 @@ function Login() {
                   <label htmlFor="password" className="text-lg">
                     Password:
                   </label>
-                  <input
-                    type="text"
-                    id="password"
-                    name="password"
-                    value={user.password}
-                    onChange={(e) =>
-                      setUser({ ...user, password: e.target.value })
-                    }
-                    className="border-b border-black outline-none bg-transparent text-lg"
-                  />
+
+                  <div className="relative w-full">
+                    <input
+                      type={isPasswordVisible ? "text" : "password"}
+                      id="password"
+                      autocomplete="off"
+                      name="password"
+                      onChange={(e) =>
+                        setUser({ ...user, password: e.target.value })
+                      }
+                      value={user.password}
+                      className="border-b border-black outline-none bg-transparent text-lg w-full py-2"
+                    />
+                    {isPasswordVisible ? (
+                      <FaRegEyeSlash
+                        className="absolute top-1/2 right-2 -translate-y-1/2 text-black cursor-pointer text-xl"
+                        onClick={() => setIsPasswordVisible(false)}
+                      />
+                    ) : (
+                      <FaRegEye
+                        className="absolute top-1/2 right-2 -translate-y-1/2 text-black cursor-pointer text-xl"
+                        onClick={() => setIsPasswordVisible(true)}
+                      />
+                    )}
+                  </div>
 
                   <span className="text-pink900 ">Forget password</span>
                 </div>
