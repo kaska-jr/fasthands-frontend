@@ -21,6 +21,7 @@ export { default as ProfileInfo } from "./artisan-admin/ProfileInfo";
 export { default as InputForm } from "./artisan-admin/InputForm";
 export { default as Header } from "./artisan-admin/Header";
 export { default as Collection } from "./artisan-admin/Collection";
+export { default as ToggleAvailability } from "./artisan-admin/ToggleAvailability";
 
 //CLIENT COMPONENTS
 export { default as ClientNav } from "./client-admin/ClientNav";

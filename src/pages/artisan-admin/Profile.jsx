@@ -5,15 +5,7 @@ const Profile = () => {
   return (
     <div className="bg-white">
       <Header text="Profile" />
-      <main className="m-10 w-[90%] max-w-3xl mx-auto flex flex-col gap-4">
-        {/* NAME */}
-        <InputForm
-          label="name"
-          type="text"
-          name="name"
-          placeholder="Obiete Sophia Chinyere"
-        />
-
+      <main className="m-10 pb-10 w-[90%] max-w-3xl mx-auto flex flex-col gap-4">
         {/* USERNAME */}
         <InputForm
           label="Username"
@@ -45,16 +37,16 @@ const Profile = () => {
           label="Email"
           type="email"
           name="email"
-          placeholder="sophiagregory15193@gmail.com"
+          placeholder="johndoe@gmail.com"
         />
 
         {/* PHONE NO */}
-        <InputForm
+        {/* <InputForm
           label="Phone No"
           name="phoneno"
           type="number"
           placeholder="09033238876"
-        />
+        /> */}
 
         {/* LOCATION */}
         <InputForm
@@ -70,14 +62,6 @@ const Profile = () => {
           type="text"
           name="yearsofexperience"
           placeholder="5 Years"
-        />
-
-        {/* PASSWORD */}
-        <InputForm
-          label="Password"
-          name="password"
-          type="password"
-          placeholder=".........."
         />
       </main>
     </div>

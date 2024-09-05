@@ -11,7 +11,7 @@ const user = {
   profileImg: "/black.jpg",
 };
 
-const CLientLayout = () => {
+const ClientLayout = () => {
   const dispatch = useDispatch();
   const { isNavBar } = useSelector((state) => state.toggleMenu);
 
@@ -42,4 +42,4 @@ const CLientLayout = () => {
   );
 };
 
-export default CLientLayout;
+export default ClientLayout;

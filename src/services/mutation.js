@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { createUser, loginUser } from "./api";
+import { createUser, loginUser, toggleArtisanAvailability } from "./api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../context";
@@ -56,6 +56,33 @@ export function useLoginUser() {
         toast.error(errorKey + ": " + errorText);
       } else {
         const errorText = message[errorKey][0];
+        toast.error(errorKey + ": " + errorText);
+      }
+    },
+  });
+}
+
+//Toggle Artisan Availability
+export function useToggleArtisanAvailability() {
+  return useMutation({
+    mutationFn: (data) => toggleArtisanAvailability(data),
+    onSuccess: () => {
+      toast.success("Availability updated successfully");
+    },
+    onError: (error) => {
+      console.log(error);
+      const message = error.response.data;
+      const errorKey = Object.keys(message)[0];
+
+      if (error.response.status === 400) {
+        const message = error.response.data;
+        const errorKey = Object.keys(message)[0];
+        const errorText = message[errorKey][0];
+        toast.error(errorText);
+      }
+
+      if (typeof message[errorKey] === "string") {
+        const errorText = message[errorKey];
         toast.error(errorKey + ": " + errorText);
       }
     },

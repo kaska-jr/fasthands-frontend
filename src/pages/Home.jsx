@@ -8,13 +8,10 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <Services />
+      {/* <Services />
       <About />
       <Booking />
-      <Contact />
-      {/* 
-      
-       */}
+      <Contact /> */}
     </>
   );
 };
