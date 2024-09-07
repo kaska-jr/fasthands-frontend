@@ -2,22 +2,30 @@ import React, { useState } from "react";
 import { useToggleArtisanAvailability } from "../../services/mutation";
 import { Loader2 } from "lucide-react";
 import { Switch, Tooltip } from "@radix-ui/themes";
+import { useEffect } from "react";
 
 const ToggleAvailability = () => {
-  const { mutate, isPending } = useToggleArtisanAvailability();
+  const { mutate, isPending, data } = useToggleArtisanAvailability();
 
   const [isAvailable, setIsAvailable] = useState(false);
 
+  useEffect(() => {
+    if (data) {
+      setIsAvailable(data?.data?.is_available);
+    }
+  }, [data]);
+
   const handleAvailability = () => {
     mutate({
-      isAvailable: isAvailable,
+      is_available: !isAvailable,
     });
   };
+
   return (
     <div className="flex items-center gap-2">
       <div className="flex items-center">
         {isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
-        {isPending ? (
+        {isAvailable ? (
           <span className="text-green-600 hidden md:inline-block">
             Available
           </span>
@@ -33,7 +41,7 @@ const ToggleAvailability = () => {
           <div>
             <Switch
               color="#3498db"
-              checked={isPending ? true : false}
+              checked={isAvailable ? true : false}
               onClick={handleAvailability}
             />
           </div>
@@ -42,7 +50,7 @@ const ToggleAvailability = () => {
       <div className="md:flex hidden">
         <Switch
           color="#3498db"
-          checked={isPending ? true : false}
+          checked={isAvailable ? true : false}
           onClick={handleAvailability}
         />
       </div>

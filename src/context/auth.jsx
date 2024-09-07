@@ -32,6 +32,7 @@ export default function AuthContextProvider({ children }) {
 
   const login = (token) => {
     if (token) {
+      console.log("during login", token);
       setToken(token);
       setIsLoggedIn(true);
     } else {

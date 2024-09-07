@@ -1,5 +1,5 @@
 //Get token from local storage
 export const getToken = () => {
-  const token = localStorage.getItem("fast-hands-token");
+  const token = JSON.parse(localStorage.getItem("fast-hands-token"));
   return token;
 };
