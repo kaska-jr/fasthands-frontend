@@ -1,5 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
-import { createUser, loginUser, toggleArtisanAvailability } from "./api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  createUser,
+  loginUser,
+  toggleArtisanAvailability,
+  updateProfile,
+} from "./api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthContext } from "../context";
@@ -30,33 +35,33 @@ export function useCreateUser() {
 
 //Login Mutation Function
 export function useLoginUser() {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { login } = useAuthContext();
   return useMutation({
     mutationFn: (data) => loginUser(data),
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
+      console.log(data, variables);
+      const { username } = variables;
       toast.success("Login successful");
+      console.log("login success");
       const { token, user_type } = data.data;
-      console.log(token, user_type);
-      login(token);
-
-      if (user_type === "artisan") {
-        navigate("/artisan");
-      }
-
-      if (user_type === "client") {
-        navigate("/client");
-      }
+      login({ token, username, user_type });
+      const navigatePath = user_type === "artisan" ? "/artisan" : "/client";
+      setTimeout(() => navigate(navigatePath), 3000);
     },
+
     onError: (error) => {
-      const message = error.response.data;
+      const message = error?.response?.data || {};
       const errorKey = Object.keys(message)[0];
-      if (typeof message[errorKey] === "string") {
-        const errorText = message[errorKey];
-        toast.error(errorKey + ": " + errorText);
+
+      if (errorKey) {
+        const errorText = Array.isArray(message[errorKey])
+          ? message[errorKey][0]
+          : message[errorKey];
+        toast.error(`${errorKey}: ${errorText}`);
       } else {
-        const errorText = message[errorKey][0];
-        toast.error(errorKey + ": " + errorText);
+        toast.error("An unknown error occurred");
       }
     },
   });
@@ -64,10 +69,14 @@ export function useLoginUser() {
 
 //Toggle Artisan Availability
 export function useToggleArtisanAvailability() {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (data) => toggleArtisanAvailability(data),
     onSuccess: () => {
       toast.success("Availability updated successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["artisan-availability-status"],
+      });
     },
     onError: (error) => {
       console.log(error);
@@ -85,6 +94,27 @@ export function useToggleArtisanAvailability() {
         const errorText = message[errorKey];
         toast.error(errorKey + ": " + errorText);
       }
+    },
+  });
+}
+
+//UpdateProfile
+export function useUpdateProfile() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data) => updateProfile(data),
+    onSuccess: () => {
+      toast.success("Profile updated successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["artisan-profile"],
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+      const message = error.response.data;
+      const errorKey = Object.keys(message)[0];
+      const errorText = message[errorKey];
+      toast.error(errorKey + ": " + errorText);
     },
   });
 }

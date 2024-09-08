@@ -7,20 +7,13 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { MdOutlineFacebook } from "react-icons/md";
 import { useLoginUser } from "../../services/mutation";
-import { useAuthContext } from "../../context";
 import { Loader2 } from "lucide-react";
 
 function Login() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const { isLoggedIn } = useAuthContext();
-
-  if (isLoggedIn) {
-    return <Navigate to="/artisan" replace />;
-  }
 
   const [user, setUser] = React.useState({
     username: "",

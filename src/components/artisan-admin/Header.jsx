@@ -13,7 +13,9 @@ const Header = ({ text }) => {
     <div className="flex items-center justify-between w-full border-b sticky top-0 px-4 md:px-10 py-6 bg-white z-10">
       <h1 className="text-xl font-bold capitalize">{text}</h1>
       <div className="flex-1 flex items-center justify-end gap-4">
-        <ToggleAvailability />
+        <div className="hidden md:block">
+          <ToggleAvailability />
+        </div>
 
         <div className="relative h-fit w-[30%] min-w-[100px]">
           <input

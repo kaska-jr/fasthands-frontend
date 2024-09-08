@@ -3,11 +3,13 @@ import { useToggleArtisanAvailability } from "../../services/mutation";
 import { Loader2 } from "lucide-react";
 import { Switch, Tooltip } from "@radix-ui/themes";
 import { useEffect } from "react";
+import { useGetArtisanAvailability } from "../../services/queries";
 
 const ToggleAvailability = () => {
   const { mutate, isPending, data } = useToggleArtisanAvailability();
-
-  const [isAvailable, setIsAvailable] = useState(false);
+  const { data: availabilityData } = useGetArtisanAvailability();
+  const db_availability = availabilityData?.data?.is_available;
+  const [isAvailable, setIsAvailable] = useState(db_availability);
 
   useEffect(() => {
     if (data) {
@@ -36,24 +38,15 @@ const ToggleAvailability = () => {
         )}
       </div>
 
-      <div className="flex md:hidden">
-        <Tooltip content={isPending ? "Available" : "Not Available"}>
-          <div>
-            <Switch
-              color="#3498db"
-              checked={isAvailable ? true : false}
-              onClick={handleAvailability}
-            />
-          </div>
-        </Tooltip>
-      </div>
-      <div className="md:flex hidden">
-        <Switch
-          color="#3498db"
-          checked={isAvailable ? true : false}
-          onClick={handleAvailability}
-        />
-      </div>
+      <Tooltip content={isAvailable ? "Available" : "Not Available"}>
+        <div>
+          <Switch
+            color="#3498db"
+            checked={isAvailable ? true : false}
+            onClick={handleAvailability}
+          />
+        </div>
+      </Tooltip>
     </div>
   );
 };

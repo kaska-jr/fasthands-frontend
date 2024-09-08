@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 
 const NavigationLinks = [
   { id: 1, link: "/artisan", label: "profile" },
-  { id: 24, link: "/artisan/overview", label: "overview" },
   { id: 2, link: "/artisan/gallery", label: "gallery" },
   { id: 3, link: "/artisan/pricing", label: "pricing" },
   { id: 4, link: "/artisan/schedule", label: "schedule" },

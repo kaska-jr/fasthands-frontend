@@ -1,5 +1,8 @@
 import { createContext, useState } from "react";
 import usePersistedState from "../hooks/usePersistedState";
+import { QueryCache } from "@tanstack/react-query";
+
+const queryCache = new QueryCache();
 
 const defaultValues = {
   user: undefined,
@@ -30,10 +33,11 @@ export default function AuthContextProvider({ children }) {
     defaultValue: undefined,
   });
 
-  const login = (token) => {
+  const login = (user) => {
+    const { token } = user;
     if (token) {
-      console.log("during login", token);
       setToken(token);
+      setUser(user);
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
@@ -42,6 +46,7 @@ export default function AuthContextProvider({ children }) {
 
   const logout = () => {
     setIsLoggedIn(false);
+    queryCache.clear();
     setToken(undefined);
     setUser(undefined);
   };

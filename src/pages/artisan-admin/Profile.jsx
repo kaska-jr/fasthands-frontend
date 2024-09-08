@@ -1,69 +1,167 @@
-import React from "react";
+import React, { useState } from "react";
 import { Header, InputForm } from "../../components";
+import { getUserFromLocalStorage } from "../../lib/helpers";
+import { useGetArtisanProfile } from "../../services/queries";
+import { IoMdCloseCircle } from "react-icons/io";
+import { useUpdateProfile } from "../../services/mutation";
+import { Loader2 } from "lucide-react";
 
 const Profile = () => {
+  const { username } = getUserFromLocalStorage();
+
+  const { data } = useGetArtisanProfile();
+
+  const { mutate, isPending } = useUpdateProfile();
+
+  const { location, skills, bio } = data?.data || {};
+
+  const locationOptions = [
+    {
+      id: 2,
+      name: "Aba",
+    },
+    {
+      id: 1,
+      name: "Umuahia",
+    },
+  ];
+
+  const skillsOption = [
+    {
+      id: 1,
+      name: "Hair Dresser",
+    },
+    {
+      id: 2,
+      name: "Hair Stylist",
+    },
+  ];
+
+  const [ProfileData, setProfileData] = useState({
+    location: location || "",
+    skills: skills || [],
+    bio: bio || "",
+  });
+
+  const handleProfileDataChange = (e) => {
+    let value = e.target.value;
+    const name = e.target.name;
+    if (name === "skills") {
+      if (ProfileData.skills.includes(Number(value))) return;
+      setProfileData((prev) => {
+        return {
+          ...prev,
+          skills: [...prev.skills, Number(value)],
+        };
+      });
+      return;
+    }
+    if (name === "location") {
+      value = Number(value);
+      setProfileData((prev) => {
+        return {
+          ...prev,
+          [name]: value,
+        };
+      });
+    }
+    setProfileData((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const getSkill = (skillId) => {
+    const skillOption = skillsOption.find((skill) => skill.id === skillId);
+    return skillOption?.name;
+  };
+
+  const removeSkill = (id) => {
+    const filteredSkills = ProfileData.skills.filter((skill) => skill !== id);
+    setProfileData((prev) => {
+      return {
+        ...prev,
+        skills: [...filteredSkills],
+      };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    mutate(ProfileData);
+  };
+
   return (
     <div className="bg-white">
       <Header text="Profile" />
-      <main className="m-10 pb-10 w-[90%] max-w-3xl mx-auto flex flex-col gap-4">
+      <form
+        className="m-10 pb-10 w-[90%] max-w-3xl mx-auto flex flex-col gap-4"
+        onSubmit={handleSubmit}
+      >
         {/* USERNAME */}
         <InputForm
           label="Username"
           name="username"
           type="text"
-          placeholder="Sophieluv"
+          disabled={true}
+          value={username || ""}
+          onChange={handleProfileDataChange}
         />
-
-        {/* BIO - textArea*/}
-        <div className="w-full">
-          <label
-            htmlFor="bio"
-            className="capitalize text-skyBlue900 font-semibold"
-          >
-            Bio:
-          </label>
-
-          <textarea
-            name="bio"
-            id="bio"
-            rows="10"
-            className="focus:outline-none focus:bg-[#F5F5F5] bg-[#F5F5F5] h-40 rounded-md p-3 text-black w-full border border-[#F5F5F5] focus:border-skyBlue900"
-            placeholder="Neque porro quisquam est qui dolorem ipsum quia dolor"
-          ></textarea>
-        </div>
-
-        {/* EMAIL */}
-        <InputForm
-          label="Email"
-          type="email"
-          name="email"
-          placeholder="johndoe@gmail.com"
-        />
-
-        {/* PHONE NO */}
-        {/* <InputForm
-          label="Phone No"
-          name="phoneno"
-          type="number"
-          placeholder="09033238876"
-        /> */}
 
         {/* LOCATION */}
         <InputForm
           label="Location"
-          type="text"
+          type="select"
           name="location"
-          placeholder="No 10 Calabar Street Opp Abia Poly "
+          value={ProfileData.location}
+          options={locationOptions}
+          onChange={handleProfileDataChange}
         />
 
-        {/* YEARS OF EXPERIENCE */}
+        <div className="flex items-center gap-2">
+          {ProfileData.skills.map((id) => (
+            <div
+              key={id}
+              className="rounded-full bg-[#F5F5F5] px-1 py-1 border border-skyBlue900 w-fit text-sm flex items-center gap-1"
+            >
+              <p>{getSkill(id)}</p>
+              <IoMdCloseCircle
+                className=" text-skyBlue900 cursor-pointer"
+                onClick={() => removeSkill(id)}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* SKILLS */}
         <InputForm
-          label="Years Of Experience"
-          type="text"
-          name="yearsofexperience"
-          placeholder="5 Years"
+          label="Skills"
+          type="select"
+          name="skills"
+          options={skillsOption}
+          selectedValues={ProfileData.skills}
+          onChange={handleProfileDataChange}
         />
-      </main>
+
+        {/* BIO */}
+        <InputForm
+          label="bio"
+          type="textArea"
+          name="bio"
+          value={ProfileData.bio}
+          onChange={handleProfileDataChange}
+        />
+
+        <button
+          className="bg-skyBlue900 px-3 py-1 lg:px-3 lg:py-1 text-white text-base lg:text-lg font-medium rounded-md flex items-center justify-between gap-2 w-fit"
+          disabled={isPending}
+        >
+          {isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
+          Update Profile
+        </button>
+      </form>
     </div>
   );
 };
