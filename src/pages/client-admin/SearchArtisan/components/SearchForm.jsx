@@ -6,7 +6,7 @@ const SearchForm = () => {
   const [location, setLocation] = useState(1);
   const [skills, setSkills] = useState([]);
 
-  const { data } = useSearchArtisan(location, skills);
+  const { data } = useSearchArtisan();
 
   console.log(data);
 

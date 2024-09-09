@@ -19,9 +19,9 @@ export function useGetArtisanAvailability() {
   });
 }
 
-export function useSearchArtisan(location, skills) {
+export function useSearchArtisan() {
   return useQuery({
-    queryKey: ["search-artisan", location, skills],
-    queryFn: () => searchArtisan(location, skills),
+    queryKey: ["search-artisan"],
+    queryFn: () => searchArtisan(),
   });
 }

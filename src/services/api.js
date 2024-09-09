@@ -61,7 +61,7 @@ export const getArtisanAvailability = async () => {
   );
 };
 
-export const searchArtisan = async (location, skills) => {
-  const fullUrl = `profiles/artisan/search?location=${location}&skills=${skills}`;
+export const searchArtisan = async () => {
+  const fullUrl = `profiles/artisan/search`;
   return await axiosInstance.get(fullUrl);
 };

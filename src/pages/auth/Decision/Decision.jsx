@@ -25,7 +25,7 @@ function Decision() {
   ];
 
   return (
-    <div className="w-full bg-white flex flex-col items-center justify-center my-32">
+    <div className="w-full bg-white flex flex-col items-center justify-center my-14 md:my-32">
       <NavLink
         to="/"
         className={
@@ -80,7 +80,7 @@ function Decision() {
             to="/register"
             className="px-5 py-2 bg-skyBlue900 rounded-md flex items-center justify-center text-white font-bold lg:text-lg"
           >
-            Register Here
+            Proceed
           </NavLink>
 
           <span className="mb-1">
