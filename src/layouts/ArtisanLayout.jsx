@@ -39,7 +39,7 @@ const ArtisanLayout = () => {
                   <span>1</span>
                 </div>
               </div>
-              <div className="md:hidden block">
+              <div className="md:hidden block ">
                 <ToggleAvailability />
               </div>
             </div>

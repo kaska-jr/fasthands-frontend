@@ -21,7 +21,7 @@ const ClientLayout = () => {
       <nav
         className={`w-48 sm:w-60 lg:w-96 bg-skyBlue900 h-screen fixed ${
           isNavBar ? "translate-x-0" : "-translate-x-[200%]"
-        } top-0 md:left-0 md:translate-x-0 transition duration-400 ease-in-out overflow-y-auto rounded-r-xl text-white`}
+        } top-0 md:left-0 md:translate-x-0 transition duration-400 ease-in-out overflow-y-auto rounded-r-xl text-white z-10`}
       >
         <div className="min-h-screen flex flex-col relative">
           <IoIosClose
@@ -35,7 +35,7 @@ const ClientLayout = () => {
       </nav>
 
       {/* OUTLET WRAPPER */}
-      <div className="w-full md:ml-60 lg:ml-96 p-10 flex-1 bg-white">
+      <div className="w-full md:ml-60 lg:ml-96  flex-1 bg-white">
         <Outlet />
       </div>
     </div>

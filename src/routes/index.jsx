@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { HomeLayout } from "../layouts";
 import PrivateRouteWrapper from "../auth-wrappers/PrivateRouteWrapper";
 import {
   Home,
@@ -13,7 +12,6 @@ import {
   Payment,
   Login,
   Register,
-  ArtisanLayout,
   CreateService,
   Gallery,
   History,
@@ -21,14 +19,14 @@ import {
   ArtisanProfile,
   Reviews,
   Schedule,
-  NotFound,
   ClientProfile,
 } from "../pages";
-import ClientLayout from "../layouts/ClientLayout";
+import { ClientLayout, ArtisanLayout, HomeLayout } from "../layouts";
+import { Loading, NotFound } from "../components";
 
 const AppRoutes = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route index element={<Home />} />
@@ -57,8 +55,12 @@ const AppRoutes = () => {
           <Route path="create-a-service" element={<CreateService />} />
         </Route>
 
-        <Route path="/client" element={<ClientLayout />}>
+        <Route
+          path="/client"
+          element={<PrivateRouteWrapper component={<ClientLayout />} />}
+        >
           <Route index element={<ClientProfile />} />
+          <Route path="search-artisan" element={<SearchArtisan />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

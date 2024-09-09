@@ -4,9 +4,6 @@ import { useGetArtisanProfile } from "../../services/queries";
 import { getUserFromLocalStorage } from "../../lib/helpers";
 
 const ProfileInfo = () => {
-  // const response = useGetArtisanProfile();
-  // console.log(response);
-
   const { username, user_type } = getUserFromLocalStorage();
 
   return (

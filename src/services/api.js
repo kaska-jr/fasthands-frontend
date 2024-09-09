@@ -8,14 +8,27 @@ const axiosInstance = axios.create({
   baseURL: BASE_URL,
 });
 
-console.log(getToken());
-
 const axiosInstanceWithToken = axios.create({
   baseURL: BASE_URL,
   headers: {
-    Authorization: `Token ${getToken()}`,
+    "Content-Type": "application/json",
   },
 });
+
+// Add a request interceptor to include the bearer token in the header
+axiosInstanceWithToken.interceptors.request.use(
+  (config) => {
+    // Retrieve the token gotten back from the login stored in the local Storage
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = `Token ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 // POST REQUESTS
 export const createUser = async (data) => {
@@ -46,4 +59,9 @@ export const getArtisanAvailability = async () => {
   return await axiosInstanceWithToken.get(
     "profiles/artisan/toggle-availability"
   );
+};
+
+export const searchArtisan = async (location, skills) => {
+  const fullUrl = `profiles/artisan/search?location=${location}&skills=${skills}`;
+  return await axiosInstance.get(fullUrl);
 };

@@ -6,16 +6,19 @@ import { useEffect } from "react";
 import { useGetArtisanAvailability } from "../../services/queries";
 
 const ToggleAvailability = () => {
-  const { mutate, isPending, data } = useToggleArtisanAvailability();
+  const { mutate, isPending } = useToggleArtisanAvailability();
+
   const { data: availabilityData } = useGetArtisanAvailability();
+
   const db_availability = availabilityData?.data?.is_available;
+
   const [isAvailable, setIsAvailable] = useState(db_availability);
 
   useEffect(() => {
-    if (data) {
-      setIsAvailable(data?.data?.is_available);
+    if (availabilityData) {
+      setIsAvailable(availabilityData?.data?.is_available);
     }
-  }, [data]);
+  }, [availabilityData]);
 
   const handleAvailability = () => {
     mutate({
