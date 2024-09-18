@@ -8,11 +8,10 @@ import { Loader2 } from "lucide-react";
 import InputForm from "./components/InputForm";
 
 const Profile = () => {
-  const toString = (value) => {
-    if (typeof value === "number") {
-      return value.toString();
-    }
-    return value;
+  const [skill, setSkill] = useState("");
+
+  const handleSkillChange = (e) => {
+    setSkill(e.target.value);
   };
 
   const { username } = getUserFromLocalStorage();
@@ -23,96 +22,86 @@ const Profile = () => {
 
   const { location, skills, bio } = data?.data || {};
 
-  const strLocation = toString(location);
-
-  console.log(typeof strLocation, strLocation);
-
   const locationOptions = [
     {
-      id: "1",
       name: "Umuahia",
     },
     {
-      id: "2",
       name: "Aba",
     },
-  ];
-
-  const skillsOption = [
     {
-      id: 1,
-      name: "Hair Dresser",
+      name: "Lagos",
     },
     {
-      id: 2,
-      name: "Hair Stylist",
+      name: "Abuja",
     },
   ];
 
   const [ProfileData, setProfileData] = useState({
-    location: location || "",
+    location: {
+      name: location?.name || "",
+    },
     skills: skills || [],
     bio: bio || "",
   });
 
   const handleProfileDataChange = (e) => {
-    let value = e.target.value;
-    const name = e.target.name;
-    if (name === "skills") {
-      if (ProfileData.skills.includes(Number(value))) return;
-      setProfileData((prev) => {
-        return {
-          ...prev,
-          skills: [...prev.skills, Number(value)],
-        };
-      });
-      return;
-    }
+    const { name, value } = e.target;
+
     if (name === "location") {
-      value = Number(value);
-      setProfileData((prev) => {
-        return {
-          ...prev,
-          [name]: value,
-        };
-      });
-    }
-    setProfileData((prev) => {
-      return {
+      setProfileData((prev) => ({
+        ...prev,
+        location: {
+          ...prev.location,
+          name: value,
+        },
+      }));
+    } else {
+      setProfileData((prev) => ({
         ...prev,
         [name]: value,
-      };
-    });
+      }));
+    }
+  };
+
+  const handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      if (skill && !ProfileData.skills.includes(skill)) {
+        setProfileData((prev) => ({
+          ...prev,
+          skills: [...prev.skills, skill],
+        }));
+        setSkill(""); // Clear the input field after adding the skill
+      }
+    }
   };
 
   useEffect(() => {
     if (data?.data) {
       const { location, skills, bio } = data.data;
       setProfileData({
-        location: location ? toString(location) : "",
+        location: {
+          name: location?.name || "",
+        },
         skills: skills || [],
         bio: bio || "",
       });
     }
   }, [data]);
 
-  const getSkill = (skillId) => {
-    const skillOption = skillsOption.find((skill) => skill.id === skillId);
-    return skillOption?.name;
-  };
-
   const removeSkill = (id) => {
-    const filteredSkills = ProfileData.skills.filter((skill) => skill !== id);
-    setProfileData((prev) => {
-      return {
-        ...prev,
-        skills: [...filteredSkills],
-      };
-    });
+    const filteredSkills = ProfileData.skills.filter(
+      (_, index) => index !== id
+    );
+    setProfileData((prev) => ({
+      ...prev,
+      skills: filteredSkills,
+    }));
   };
 
   const handleSubmit = (e) => {
-    console.log(ProfileData);
     e.preventDefault();
     mutate(ProfileData);
   };
@@ -131,7 +120,6 @@ const Profile = () => {
           type="text"
           disabled={true}
           value={username || ""}
-          onChange={handleProfileDataChange}
         />
 
         {/* LOCATION */}
@@ -139,39 +127,41 @@ const Profile = () => {
           label="Location"
           type="select"
           name="location"
-          value={ProfileData.location ? ProfileData.location.toString() : ""}
+          value={ProfileData.location.name || ""}
           options={locationOptions}
           onChange={handleProfileDataChange}
         />
 
+        {/* SKILLS LIST */}
         <div className="flex items-center gap-2">
-          {ProfileData.skills.map((id) => (
+          {ProfileData?.skills?.map((skill, index) => (
             <div
-              key={id}
+              key={index}
               className="rounded-full bg-[#F5F5F5] px-1 py-1 border border-skyBlue900 w-fit text-sm flex items-center gap-1"
             >
-              <p>{getSkill(id)}</p>
+              <p className="capitalize px-2">{skill}</p>
               <IoMdCloseCircle
-                className=" text-skyBlue900 cursor-pointer"
-                onClick={() => removeSkill(id)}
+                className="text-skyBlue900 cursor-pointer"
+                onClick={() => removeSkill(index)}
               />
             </div>
           ))}
         </div>
 
-        {/* SKILLS */}
+        {/* SKILLS INPUT */}
         <InputForm
           label="Skills"
-          type="select"
+          type="text"
           name="skills"
-          options={skillsOption}
-          selectedValues={ProfileData.skills}
-          onChange={handleProfileDataChange}
+          value={skill}
+          onChange={handleSkillChange}
+          onKeyDown={handleEnterKeyPress}
+          placeholder={"Type skill and press Enter"}
         />
 
         {/* BIO */}
         <InputForm
-          label="bio"
+          label="Bio"
           type="textArea"
           name="bio"
           value={ProfileData.bio}

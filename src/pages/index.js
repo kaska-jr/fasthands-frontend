@@ -19,6 +19,7 @@ export { default as History } from "./artisan-admin/History/History";
 export { default as Pricing } from "./artisan-admin/Pricing/Pricing";
 export { default as Reviews } from "./artisan-admin/Review/Reviews";
 export { default as Schedule } from "./artisan-admin/Schedule/Schedule";
+export { default as Service } from "./artisan-admin/Service/Service";
 
 //CLIENT PAGES
 export { default as ClientProfile } from "./client-admin/Profile/Profile";

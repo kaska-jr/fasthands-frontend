@@ -27,3 +27,25 @@ export const NavLinks = [
     label: <FaSearch />,
   },
 ];
+
+export const locationOptions = [
+  {
+    id: 1,
+    name: "Umuahia",
+  },
+  {
+    id: 2,
+    name: "Aba",
+  },
+];
+
+export const skillsOption = [
+  {
+    id: 1,
+    name: "Hair Dresser",
+  },
+  {
+    id: 2,
+    name: "Hair Stylist",
+  },
+];

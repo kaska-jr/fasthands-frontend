@@ -34,34 +34,47 @@ axiosInstanceWithToken.interceptors.request.use(
 export const createUser = async (data) => {
   return await axiosInstance.post("accounts/register", data);
 };
-
 export const loginUser = async (data) => {
   return await axiosInstance.post("accounts/login", data);
 };
-
 export const toggleArtisanAvailability = async (data) => {
   return await axiosInstanceWithToken.post(
     "profiles/artisan/toggle-availability",
     data
   );
 };
+export const createService = async (data) => {
+  return await axiosInstanceWithToken.post("profiles/services", data);
+};
 
+// PUT REQUESTS
 export const updateProfile = async (data) => {
   return await axiosInstanceWithToken.put("profiles/artisan", data);
+};
+export const updateService = async (data, id) => {
+  return await axiosInstanceWithToken.put(`profiles/services/${id}`, data);
 };
 
 // GET REQUESTS
 export const getArtisanProfile = async () => {
   return await axiosInstanceWithToken.get("profiles/artisan");
 };
-
 export const getArtisanAvailability = async () => {
   return await axiosInstanceWithToken.get(
     "profiles/artisan/toggle-availability"
   );
 };
-
+export const getArtisanPricing = async () => {
+  return await axiosInstanceWithToken.get("/profiles/services");
+};
+export const getArtisanServiceById = async (id) => {
+  return await axiosInstanceWithToken.get(`profiles/services/${id}`);
+};
 export const searchArtisan = async () => {
-  const fullUrl = `profiles/artisan/search`;
-  return await axiosInstance.get(fullUrl);
+  return await axiosInstanceWithToken.get("profiles/artisans/search");
+};
+
+//DELETE REQUESTS
+export const deleteService = async (id) => {
+  return await axiosInstanceWithToken.delete(`profiles/services/${id}`);
 };

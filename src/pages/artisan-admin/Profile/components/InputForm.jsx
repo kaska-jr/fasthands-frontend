@@ -9,6 +9,7 @@ const InputForm = ({
   value,
   options = [],
   onChange,
+  ...props
 }) => {
   return (
     <div className="flex flex-col gap-2">
@@ -38,8 +39,9 @@ const InputForm = ({
           {options.map((option) => (
             <option
               key={option.id}
-              value={option.id}
-              selected={value === option.id}
+              value={option.name || ""}
+              selected={value == option.name}
+              className="capitalize"
             >
               {option.name}
             </option>
@@ -54,6 +56,7 @@ const InputForm = ({
           onChange={onChange}
           value={value}
           disabled={disabled ? true : false}
+          {...props}
         />
       )}
     </div>

@@ -20,6 +20,7 @@ import {
   Reviews,
   Schedule,
   ClientProfile,
+  Service,
 } from "../pages";
 import { ClientLayout, ArtisanLayout, HomeLayout } from "../layouts";
 import { Loading, NotFound } from "../components";
@@ -47,12 +48,13 @@ const AppRoutes = () => {
           element={<PrivateRouteWrapper component={<ArtisanLayout />} />}
         >
           <Route index element={<ArtisanProfile />} />
+          <Route path="pricing" element={<Pricing />} />
+          <Route path="service/:id" element={<Service />} />
+          <Route path="create-a-service" element={<CreateService />} />
           <Route path="gallery" element={<Gallery />} />
           <Route path="history" element={<History />} />
-          <Route path="pricing" element={<Pricing />} />
           <Route path="reviews" element={<Reviews />} />
           <Route path="schedule" element={<Schedule />} />
-          <Route path="create-a-service" element={<CreateService />} />
         </Route>
 
         <Route

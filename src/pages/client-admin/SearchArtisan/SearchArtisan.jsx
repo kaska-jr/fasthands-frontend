@@ -2,14 +2,21 @@ import { ClientHeader } from "../../../components";
 import Artisan from "./components/Artisan";
 import SpotlightArtisan from "./components/SpotlightArtisan";
 import SearchForm from "./components/SearchForm";
+import { useEffect, useState } from "react";
+import { locationOptions, skillsOption } from "../../../lib/constants";
+import { useSearchArtisan } from "../../../services/queries";
 
 const SearchArtisan = () => {
+  const [artisans, setArtisans] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <>
       <ClientHeader text="Find Skill" />
+
       <section className="bg-white">
         <SpotlightArtisan />
-        <SearchForm />
+        <SearchForm setArtisans={setArtisans} setIsLoading={setIsLoading} />
       </section>
 
       <section className="bg-white w-[100%] flex justify-center items-center pb-10">
@@ -20,11 +27,15 @@ const SearchArtisan = () => {
             </h1>
           </div>
           <section className="flex justify-center items-center">
-            <section className="w-[98%] min-w-[350px] grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
-              {[1, 2, 3, 6, 4].map((_, i) => {
-                return <Artisan key={i} id={i} />;
-              })}
-            </section>
+            {isLoading ? (
+              <h1>Loading...</h1>
+            ) : (
+              <section className="w-[98%] min-w-[350px] grid grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+                {artisans.map((artisan) => {
+                  return <Artisan key={artisan.id} {...artisan} />;
+                })}
+              </section>
+            )}
           </section>
         </section>
       </section>

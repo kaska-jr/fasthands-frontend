@@ -1,17 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "../../../components";
 import { TbCurrencyNaira } from "react-icons/tb";
-import { useCreateService } from "../../../services/mutation";
+import { useParams } from "react-router-dom";
+import { useGetArtisanServiceById } from "../../../services/queries";
+import { useUpdateService } from "../../../services/mutation";
 import { Loader2 } from "lucide-react";
 
-const CreateService = () => {
-  const { mutate: submitService, isPending } = useCreateService();
+const Service = () => {
+  const param = useParams();
+
+  console.log(param.id);
+
+  const {
+    mutate: submitService,
+    isPending,
+    isSuccess,
+  } = useUpdateService(param.id);
+
+  const { data } = useGetArtisanServiceById(param.id);
+
+  const { description = "", price = "", service_name = "" } = data?.data || {};
 
   const [service, setService] = useState({
-    description: "",
-    price: "",
-    service_name: "",
+    description,
+    price,
+    service_name,
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setService({
+        description: "",
+        price: "",
+        service_name: "",
+      });
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (data?.data) {
+      setService({
+        description: data.data.description || "",
+        price: data.data.price || "",
+        service_name: data.data.service_name || "",
+      });
+    }
+  }, [data]);
 
   const handleServiceUpdate = (e) => {
     const { name, value } = e.target;
@@ -25,7 +59,7 @@ const CreateService = () => {
 
   return (
     <div className="bg-white">
-      <Header text="Create Service" />
+      <Header text="Service" />
       <form
         className="w-full"
         enctype="multipart/form-data"
@@ -44,7 +78,6 @@ const CreateService = () => {
               <input
                 name="service_name"
                 id="service_name"
-                type="text"
                 value={service.service_name}
                 onChange={handleServiceUpdate}
                 className="focus:outline-none focus:bg-[#F5F5F5] bg-[#F5F5F5] h-10 rounded-md p-3 text-black w-full border border-[#F5F5F5] focus:border-skyBlue900"
@@ -109,12 +142,13 @@ const CreateService = () => {
             <div className="col-span-2  flex justify-start w-full">
               <button
                 className="bg-skyBlue900 px-2 py-2 lg:px-3 lg:py-2 text-white text-sm lg:text-base font-medium rounded-md gap-1 w-full md:w-fit flex items-center justify-center"
+                type="submit"
                 disabled={isPending}
               >
                 {isPending ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                ) : null}{" "}
-                Create
+                ) : null}
+                Update
               </button>
             </div>
           </div>
@@ -124,4 +158,4 @@ const CreateService = () => {
   );
 };
 
-export default CreateService;
+export default Service;

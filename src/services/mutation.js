@@ -1,9 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
+  createService,
   createUser,
+  deleteService,
   loginUser,
   toggleArtisanAvailability,
   updateProfile,
+  updateService,
 } from "./api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -98,7 +101,7 @@ export function useToggleArtisanAvailability() {
   });
 }
 
-//UpdateProfile
+//Profile Mutation
 export function useUpdateProfile() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -107,6 +110,71 @@ export function useUpdateProfile() {
       toast.success("Profile updated successfully");
       queryClient.invalidateQueries({
         queryKey: ["artisan-profile"],
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+      const message = error.response.data;
+      const errorKey = Object.keys(message)[0];
+      const errorText = message[errorKey];
+      toast.error(errorKey + ": " + errorText);
+    },
+  });
+}
+
+//Service Mutation: Update
+export function useUpdateService(id) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data) => updateService(data, id),
+    onSuccess: () => {
+      toast.success("Service updated Successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["artisan-pricings", "artisan-service"],
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+      const message = error.response.data;
+      const errorKey = Object.keys(message)[0];
+      const errorText = message[errorKey];
+      toast.error(errorKey + ": " + errorText);
+    },
+  });
+}
+
+//service Mutation: Create
+export function useCreateService() {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation({
+    mutationFn: (data) => createService(data),
+    onSuccess: () => {
+      toast.success("Service created Successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["artisan-pricings"],
+      });
+      setTimeout(() => navigate("/artisan/pricing"), 2000);
+    },
+    onError: (error) => {
+      console.log(error);
+      const message = error.response.data;
+      const errorKey = Object.keys(message)[0];
+      const errorText = message[errorKey];
+      toast.error(errorKey + ": " + errorText);
+    },
+  });
+}
+
+//Service Mutation: Delete
+export function useDeleteService() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id) => deleteService(id),
+    onSuccess: () => {
+      toast.success("Service deleted Successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["artisan-pricings"],
       });
     },
     onError: (error) => {

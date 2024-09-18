@@ -13,6 +13,8 @@ TODO
    - Route Protection - done
    - Profile view and Update - done
    - Toast Integration - done
-   - Search End Point
+   - Service fetching, updating, creating and deleting - done
+   - Fix all Loading and Error state for all API End point
    - Chat End point
+   - Search End Point
 3. Form fixes and Validation with formik and yup
