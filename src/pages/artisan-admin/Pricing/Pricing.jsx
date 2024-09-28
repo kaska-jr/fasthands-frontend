@@ -57,7 +57,6 @@ const Pricing = () => {
   const { mutate: submitDelete } = useDeleteService();
 
   const handleDelete = (id) => {
-    console.log(id);
     submitDelete(id);
   };
 

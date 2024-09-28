@@ -21,6 +21,7 @@ import {
   Schedule,
   ClientProfile,
   Service,
+  Messaging,
 } from "../pages";
 import { ClientLayout, ArtisanLayout, HomeLayout } from "../layouts";
 import { Loading, NotFound } from "../components";
@@ -63,6 +64,7 @@ const AppRoutes = () => {
         >
           <Route index element={<ClientProfile />} />
           <Route path="search-artisan" element={<SearchArtisan />} />
+          <Route path="chat/:id" element={<Messaging />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

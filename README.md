@@ -15,6 +15,7 @@ TODO
    - Toast Integration - done
    - Service fetching, updating, creating and deleting - done
    - Fix all Loading and Error state for all API End point
+   - Delete modal
    - Chat End point
    - Search End Point
-3. Form fixes and Validation with formik and yup
+3. Form fixes and Validation with Formik and yup

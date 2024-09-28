@@ -16,7 +16,7 @@ const Profile = () => {
 
   const { username } = getUserFromLocalStorage();
 
-  const { data } = useGetArtisanProfile();
+  const { data, isSuccess } = useGetArtisanProfile();
 
   const { mutate, isPending } = useUpdateProfile();
 
@@ -67,7 +67,6 @@ const Profile = () => {
   const handleEnterKeyPress = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
       if (skill && !ProfileData.skills.includes(skill)) {
         setProfileData((prev) => ({
           ...prev,

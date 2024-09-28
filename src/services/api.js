@@ -37,6 +37,7 @@ export const createUser = async (data) => {
 export const loginUser = async (data) => {
   return await axiosInstance.post("accounts/login", data);
 };
+
 export const toggleArtisanAvailability = async (data) => {
   return await axiosInstanceWithToken.post(
     "profiles/artisan/toggle-availability",
@@ -53,6 +54,10 @@ export const updateProfile = async (data) => {
 };
 export const updateService = async (data, id) => {
   return await axiosInstanceWithToken.put(`profiles/services/${id}`, data);
+};
+
+export const updateClientProfile = async (data) => {
+  return await axiosInstanceWithToken.put("profiles/client", data);
 };
 
 // GET REQUESTS
@@ -74,7 +79,16 @@ export const searchArtisan = async () => {
   return await axiosInstanceWithToken.get("profiles/artisans/search");
 };
 
+export const getClientProfile = async () => {
+  return await axiosInstanceWithToken.get("profiles/client");
+};
+
 //DELETE REQUESTS
 export const deleteService = async (id) => {
   return await axiosInstanceWithToken.delete(`profiles/services/${id}`);
+};
+
+//CHAT
+export const getChatRooms = async () => {
+  return await axiosInstanceWithToken.get("chats/rooms");
 };

@@ -5,6 +5,8 @@ import AppRoutes from "./routes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,9 +23,11 @@ const App = () => {
       <ToastContainer position="top-center" />
       <Provider store={store}>
         <AuthContextProvider>
-          <main>
-            <AppRoutes />
-          </main>
+          <Theme>
+            <main>
+              <AppRoutes />
+            </main>
+          </Theme>
         </AuthContextProvider>
       </Provider>
     </QueryClientProvider>

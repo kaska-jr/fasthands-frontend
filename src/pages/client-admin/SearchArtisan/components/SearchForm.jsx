@@ -7,6 +7,8 @@ import { getLocationsByName, getSkillsByName } from "../../../../lib/helpers";
 const SearchForm = ({ setArtisans, setIsLoading }) => {
   const { data, isLoading } = useSearchArtisan();
 
+  console.log(data?.data);
+
   if (data) {
     console.log(data?.data);
 

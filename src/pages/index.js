@@ -24,3 +24,4 @@ export { default as Service } from "./artisan-admin/Service/Service";
 //CLIENT PAGES
 export { default as ClientProfile } from "./client-admin/Profile/Profile";
 export { default as SearchArtisan } from "./client-admin/SearchArtisan/SearchArtisan";
+export { default as Messaging } from "./client-admin/Messaging/Messaging";

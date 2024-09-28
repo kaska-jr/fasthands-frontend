@@ -5,6 +5,7 @@ import {
   deleteService,
   loginUser,
   toggleArtisanAvailability,
+  updateClientProfile,
   updateProfile,
   updateService,
 } from "./api";
@@ -122,6 +123,27 @@ export function useUpdateProfile() {
   });
 }
 
+// Profile Mutation: CLient
+export function useUpdateClientProfile() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data) => updateClientProfile(data),
+    onSuccess: () => {
+      toast.success("Profile updated successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["client-profile"],
+      });
+    },
+    onError: (error) => {
+      console.log(error);
+      const message = error.response.data;
+      const errorKey = Object.keys(message)[0];
+      const errorText = message[errorKey];
+      toast.error(errorKey + ": " + errorText);
+    },
+  });
+}
+
 //Service Mutation: Update
 export function useUpdateService(id) {
   const queryClient = useQueryClient();
@@ -130,7 +152,7 @@ export function useUpdateService(id) {
     onSuccess: () => {
       toast.success("Service updated Successfully");
       queryClient.invalidateQueries({
-        queryKey: ["artisan-pricings", "artisan-service"],
+        queryKey: ["artisan-pricing", "artisan-service"],
       });
     },
     onError: (error) => {
@@ -186,3 +208,5 @@ export function useDeleteService() {
     },
   });
 }
+
+//

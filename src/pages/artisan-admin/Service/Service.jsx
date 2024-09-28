@@ -28,16 +28,6 @@ const Service = () => {
   });
 
   useEffect(() => {
-    if (isSuccess) {
-      setService({
-        description: "",
-        price: "",
-        service_name: "",
-      });
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
     if (data?.data) {
       setService({
         description: data.data.description || "",

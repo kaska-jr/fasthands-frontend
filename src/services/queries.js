@@ -4,6 +4,7 @@ import {
   getArtisanPricing,
   getArtisanProfile,
   getArtisanServiceById,
+  getClientProfile,
   searchArtisan,
 } from "./api";
 
@@ -21,16 +22,9 @@ export function useGetArtisanAvailability() {
   });
 }
 
-export function useSearchArtisan() {
-  return useQuery({
-    queryKey: ["search-artisan"],
-    queryFn: () => searchArtisan(),
-  });
-}
-
 export function useGetArtisanPricing() {
   return useQuery({
-    queryKey: ["artisan-pricings"],
+    queryKey: ["artisan-pricing"],
     queryFn: () => getArtisanPricing(),
   });
 }
@@ -39,5 +33,20 @@ export function useGetArtisanServiceById(id) {
   return useQuery({
     queryKey: ["artisan-service", id],
     queryFn: () => getArtisanServiceById(id),
+  });
+}
+
+//Client Side Endpoints
+export function useSearchArtisan() {
+  return useQuery({
+    queryKey: ["search-artisan"],
+    queryFn: () => searchArtisan(),
+  });
+}
+
+export function useGetClientProfile() {
+  return useQuery({
+    queryKey: ["client-profile"],
+    queryFn: () => getClientProfile(),
   });
 }

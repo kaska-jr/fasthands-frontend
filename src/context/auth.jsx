@@ -11,6 +11,7 @@ const defaultValues = {
   setIsLoggedIn: () => undefined,
   login: () => undefined,
   logout: () => undefined,
+  setProfile: () => undefined,
 };
 
 export const AuthContext = createContext(defaultValues);
@@ -30,6 +31,11 @@ export default function AuthContextProvider({ children }) {
 
   const [token, setToken] = usePersistedState({
     key: "fast-hands-token",
+    defaultValue: undefined,
+  });
+
+  const [profile, setProfile] = usePersistedState({
+    key: "fast-hands-profile",
     defaultValue: undefined,
   });
 
@@ -68,6 +74,8 @@ export default function AuthContextProvider({ children }) {
         logout,
         makeDecision,
         userType,
+        setProfile,
+        profile,
       }}
     >
       {children}
