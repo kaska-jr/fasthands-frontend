@@ -21,7 +21,7 @@ const ClientLayout = () => {
       <nav
         className={`w-48 sm:w-60 lg:w-96 bg-skyBlue900 h-screen fixed ${
           isNavBar ? "translate-x-0" : "-translate-x-[200%]"
-        } pb-10 md:pb-0 top-0 md:left-0 md:translate-x-0 transition duration-400 ease-in-out overflow-y-auto rounded-r-xl text-white z-10`}
+        } pb-10 md:pb-0 top-0 md:left-0 md:translate-x-0 transition duration-400 ease-in-out overflow-y-auto rounded-r-xl text-white z-[99999] `}
       >
         <div className="min-h-screen flex flex-col relative">
           <IoIosClose

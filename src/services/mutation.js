@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
+  createBooking,
   createService,
   createUser,
   deleteService,
@@ -209,4 +210,25 @@ export function useDeleteService() {
   });
 }
 
-//
+//Booking Mutation: Create
+export function useCreateBooking(artisanID) {
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  return useMutation({
+    mutationFn: (data) => createBooking(data, artisanID),
+    onSuccess: () => {
+      toast.success("Booking created Successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["artisan-bookings"],
+      });
+      setTimeout(() => navigate("/client/bookings"), 1000);
+    },
+    onError: (error) => {
+      console.log(error);
+      const message = error.response.data;
+      const errorKey = Object.keys(message)[0];
+      const errorText = message[errorKey];
+      toast.error(errorKey + ": " + errorText);
+    },
+  });
+}

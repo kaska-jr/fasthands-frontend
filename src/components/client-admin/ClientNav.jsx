@@ -12,6 +12,7 @@ const NavigationLinks = [
   },
   { id: 2, link: "/client/search-artisan", label: "Find Skill" },
   { id: 3, link: "/client/chat/new-chat", label: "Messaging" },
+  { id: 4, link: "/client/bookings", label: "Bookings" },
 ];
 
 const ClientNav = () => {

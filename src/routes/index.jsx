@@ -22,6 +22,9 @@ import {
   ClientProfile,
   Service,
   Messaging,
+  Artisan,
+  Bookings,
+  ArtisanBookings,
 } from "../pages";
 import { ClientLayout, ArtisanLayout, HomeLayout } from "../layouts";
 import { Loading, NotFound } from "../components";
@@ -55,6 +58,7 @@ const AppRoutes = () => {
           <Route path="gallery" element={<Gallery />} />
           <Route path="history" element={<History />} />
           <Route path="reviews" element={<Reviews />} />
+          <Route path="bookings" element={<ArtisanBookings />} />
           <Route path="schedule" element={<Schedule />} />
         </Route>
 
@@ -64,7 +68,9 @@ const AppRoutes = () => {
         >
           <Route index element={<ClientProfile />} />
           <Route path="search-artisan" element={<SearchArtisan />} />
+          <Route path="profile-artisans/:artisanID" element={<Artisan />} />
           <Route path="chat/:id" element={<Messaging />} />
+          <Route path="bookings" element={<Bookings />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

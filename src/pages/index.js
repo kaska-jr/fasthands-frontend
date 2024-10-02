@@ -20,8 +20,11 @@ export { default as Pricing } from "./artisan-admin/Pricing/Pricing";
 export { default as Reviews } from "./artisan-admin/Review/Reviews";
 export { default as Schedule } from "./artisan-admin/Schedule/Schedule";
 export { default as Service } from "./artisan-admin/Service/Service";
+export { default as ArtisanBookings } from "./artisan-admin/Bookings/Bookings";
 
 //CLIENT PAGES
 export { default as ClientProfile } from "./client-admin/Profile/Profile";
 export { default as SearchArtisan } from "./client-admin/SearchArtisan/SearchArtisan";
 export { default as Messaging } from "./client-admin/Messaging/Messaging";
+export { default as Artisan } from "./client-admin/Artisan/Artisan";
+export { default as Bookings } from "./client-admin/Bookings/Bookings";

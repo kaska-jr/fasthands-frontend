@@ -40,7 +40,7 @@ const Artisan = ({ id, username, location, skills, bio, is_available }) => {
         )}
 
         <div className="flex gap-2 items-center">
-          <Link to={`#`}>
+          <Link to={`/client/profile-artisans/${id}`}>
             <button className="hover:bg-skyBlue900 w-full md:w-fit py-1 px-3 h-8 rounded-md text-skyBlue900 border border-skyBlue900 bg-white hover:text-white">
               Profile
             </button>

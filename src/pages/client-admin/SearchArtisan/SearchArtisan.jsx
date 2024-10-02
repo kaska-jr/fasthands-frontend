@@ -1,4 +1,4 @@
-import { ClientHeader } from "../../../components";
+import { ClientHeader, Loading } from "../../../components";
 import Artisan from "./components/Artisan";
 import SpotlightArtisan from "./components/SpotlightArtisan";
 import SearchForm from "./components/SearchForm";
@@ -27,14 +27,16 @@ const SearchArtisan = () => {
             </h1>
           </div>
           <section className="flex justify-center items-center">
-            {isLoading ? (
-              <h1>Loading...</h1>
-            ) : (
-              <section className="w-[98%] min-w-[350px] grid grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-                {artisans.map((artisan) => {
-                  return <Artisan key={artisan.id} {...artisan} />;
-                })}
-              </section>
+            <section className="w-[98%] min-w-[350px] grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+              {artisans?.map((artisan) => {
+                return <Artisan key={artisan.id} {...artisan} />;
+              })}
+            </section>
+
+            {isLoading && (
+              <div className="flex justify-center items-center w-full min-h-[50vh]">
+                <Loading />
+              </div>
             )}
           </section>
         </section>

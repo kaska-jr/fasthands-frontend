@@ -1,13 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   getArtisanAvailability,
+  getArtisanBookings,
   getArtisanPricing,
   getArtisanProfile,
+  getArtisanProfileById,
   getArtisanServiceById,
+  getClientBookings,
   getClientProfile,
   searchArtisan,
 } from "./api";
 
+// Artisan Side Endpoints
 export function useGetArtisanProfile() {
   return useQuery({
     queryKey: ["artisan-profile"],
@@ -36,6 +40,13 @@ export function useGetArtisanServiceById(id) {
   });
 }
 
+export function useGetArtisanBookings() {
+  return useQuery({
+    queryKey: ["artisan-bookings"],
+    queryFn: () => getArtisanBookings(),
+  });
+}
+
 //Client Side Endpoints
 export function useSearchArtisan() {
   return useQuery({
@@ -48,5 +59,19 @@ export function useGetClientProfile() {
   return useQuery({
     queryKey: ["client-profile"],
     queryFn: () => getClientProfile(),
+  });
+}
+
+export function useGetArtisanProfileById(id) {
+  return useQuery({
+    queryKey: ["artisan-profile-by-id", id],
+    queryFn: () => getArtisanProfileById(id),
+  });
+}
+
+export function useGetClientBookings() {
+  return useQuery({
+    queryKey: ["client-bookings"],
+    queryFn: () => getClientBookings(),
   });
 }

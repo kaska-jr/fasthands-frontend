@@ -48,6 +48,10 @@ export const createService = async (data) => {
   return await axiosInstanceWithToken.post("profiles/services", data);
 };
 
+export const createBooking = async (data, artisanID) => {
+  return await axiosInstanceWithToken.post(`bookings/${artisanID}`, data);
+};
+
 // PUT REQUESTS
 export const updateProfile = async (data) => {
   return await axiosInstanceWithToken.put("profiles/artisan", data);
@@ -81,6 +85,18 @@ export const searchArtisan = async () => {
 
 export const getClientProfile = async () => {
   return await axiosInstanceWithToken.get("profiles/client");
+};
+
+export const getArtisanProfileById = async (id) => {
+  return await axiosInstanceWithToken.get(`profiles/artisans/${id}`);
+};
+
+export const getClientBookings = async () => {
+  return await axiosInstanceWithToken.get(`bookings`);
+};
+
+export const getArtisanBookings = async () => {
+  return await axiosInstanceWithToken.get(`bookings`);
 };
 
 //DELETE REQUESTS

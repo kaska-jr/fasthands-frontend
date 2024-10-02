@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "../../../components";
+import { Header, Loading } from "../../../components";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { useGetArtisanPricing } from "../../../services/queries";
@@ -52,7 +52,7 @@ import { useDeleteService } from "../../../services/mutation";
 // ];
 
 const Pricing = () => {
-  const { data } = useGetArtisanPricing();
+  const { data, isLoading } = useGetArtisanPricing();
 
   const { mutate: submitDelete } = useDeleteService();
 
@@ -65,19 +65,15 @@ const Pricing = () => {
 
   return (
     <div className="bg-white">
-      <Header text="Pricing" />
+      <Header text="Services" />
       <main className="m-10 w-[90%] max-w-3xl mx-auto">
-        <div className="grid grid-cols-3 mb-8">
-          <h1 className="text-xl text-skyBlue900 col-span-2">Services</h1>
-        </div>
-
         <div className="flex flex-col gap-6">
           {pricingList.map((item) => {
             const { id, service_name, price, description } = item;
             return (
               <div
                 key={id}
-                className="flex flex-col gap-5 p-5 rounded-md border-b"
+                className="flex flex-col gap-5 p-5 rounded-md border"
               >
                 <div className="flex flex-col md:flex-row">
                   <h1 className="text-base font-semibold w-48">
@@ -121,6 +117,12 @@ const Pricing = () => {
               </div>
             );
           })}
+
+          {isLoading && (
+            <div className="flex justify-center items-center w-full min-h-[50vh]">
+              <Loading />
+            </div>
+          )}
         </div>
 
         <div className="my-8 pb-8 grid grid-cols-3">

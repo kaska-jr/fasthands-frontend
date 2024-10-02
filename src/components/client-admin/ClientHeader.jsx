@@ -9,7 +9,7 @@ const ClientHeader = ({ text }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="flex items-center justify-between w-full border-b sticky top-0 md:px-10 px-4 py-6 bg-white">
+    <div className="flex items-center justify-between w-full border-b sticky top-0 md:px-10 px-4 py-6 bg-white z-50">
       <h1 className="text-xl font-bold capitalize">{text}</h1>
       <div className="flex-1 flex items-center justify-end gap-4">
         <div className="relative h-fit w-[30%] min-w-[100px]">

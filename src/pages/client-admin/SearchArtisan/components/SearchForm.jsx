@@ -11,7 +11,6 @@ const SearchForm = ({ setArtisans, setIsLoading }) => {
 
   if (data) {
     console.log(data?.data);
-
     setArtisans(data?.data);
     setIsLoading(isLoading);
   }
