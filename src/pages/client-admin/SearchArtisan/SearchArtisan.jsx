@@ -3,8 +3,6 @@ import Artisan from "./components/Artisan";
 import SpotlightArtisan from "./components/SpotlightArtisan";
 import SearchForm from "./components/SearchForm";
 import { useEffect, useState } from "react";
-import { locationOptions, skillsOption } from "../../../lib/constants";
-import { useSearchArtisan } from "../../../services/queries";
 
 const SearchArtisan = () => {
   const [artisans, setArtisans] = useState([]);
@@ -13,7 +11,6 @@ const SearchArtisan = () => {
   return (
     <>
       <ClientHeader text="Find Skill" />
-
       <section className="bg-white">
         <SpotlightArtisan />
         <SearchForm setArtisans={setArtisans} setIsLoading={setIsLoading} />
@@ -32,12 +29,6 @@ const SearchArtisan = () => {
                 return <Artisan key={artisan.id} {...artisan} />;
               })}
             </section>
-
-            {isLoading && (
-              <div className="flex justify-center items-center w-full min-h-[50vh]">
-                <Loading />
-              </div>
-            )}
           </section>
         </section>
       </section>

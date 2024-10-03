@@ -10,7 +10,7 @@ const NavigationLinks = [
     link: "/client",
     label: "Profile",
   },
-  { id: 2, link: "/client/search-artisan", label: "Find Skill" },
+  { id: 2, link: "/client/search-artisan", label: "Find Skills" },
   { id: 3, link: "/client/chat/new-chat", label: "Messaging" },
   { id: 4, link: "/client/bookings", label: "Bookings" },
 ];

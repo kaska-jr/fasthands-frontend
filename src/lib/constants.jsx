@@ -30,12 +30,16 @@ export const NavLinks = [
 
 export const locationOptions = [
   {
+    id: 0,
+    name: "all",
+  },
+  {
     id: 1,
-    name: "Umuahia",
+    name: "umuahia",
   },
   {
     id: 2,
-    name: "Aba",
+    name: "aba",
   },
 ];
 

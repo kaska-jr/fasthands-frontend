@@ -61,7 +61,7 @@ function Login() {
                     onChange={(e) =>
                       setUser({ ...user, username: e.target.value })
                     }
-                    className="border-b border-black text-lg outline-none bg-white dark:bg-bg-white focus-within:bg-white focus-visible:bg-white py-2"
+                    className="border-b border-black text-lg outline-none bg-white dark:bg-bg-white focus-visible:bg-white py-2 autofill:!bg-white "
                   />
                 </div>
 
@@ -80,7 +80,7 @@ function Login() {
                         setUser({ ...user, password: e.target.value })
                       }
                       value={user.password}
-                      className="border-b border-black outline-none bg-transparent text-lg w-full py-2"
+                      className="border-b border-black outline-none bg-transparent text-lg w-full py-2 autofill:!bg-white dark:bg-bg-white focus-visible:bg-white"
                     />
                     {isPasswordVisible ? (
                       <FaRegEyeSlash

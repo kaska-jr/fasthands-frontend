@@ -79,8 +79,11 @@ export const getArtisanPricing = async () => {
 export const getArtisanServiceById = async (id) => {
   return await axiosInstanceWithToken.get(`profiles/services/${id}`);
 };
-export const searchArtisan = async () => {
-  return await axiosInstanceWithToken.get("profiles/artisans/search");
+export const searchArtisan = async (searchParams) => {
+  const { location, skill } = searchParams;
+  return await axiosInstanceWithToken.get(
+    `profiles/artisans/search?location=${location || ""}&skill=${skill || ""}`
+  );
 };
 
 export const getClientProfile = async () => {

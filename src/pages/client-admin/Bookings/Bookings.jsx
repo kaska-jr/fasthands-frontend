@@ -6,7 +6,10 @@ import { convertToNormalTime } from "../../../lib/helpers";
 const Bookings = () => {
   const { data, isLoading } = useGetClientBookings();
 
-  console.log(data);
+  const bookings = data?.data;
+
+  console.log(bookings);
+
   const tableHeader = [
     "S/N",
     "Job No",
@@ -38,7 +41,7 @@ const Bookings = () => {
               </thead>
 
               <tbody className="text-nowrap fast-table ">
-                {data?.data.map((item, index) => {
+                {bookings?.map((item, index) => {
                   return (
                     <tr key={item.id} className="text-nowrap">
                       <td className="px-4 py-2 ">{index + 1}</td>

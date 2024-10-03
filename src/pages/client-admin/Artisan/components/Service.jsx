@@ -108,6 +108,7 @@ const Service = ({ service, artisanId }) => {
                     dateFormat="dd/MM/yyyy"
                     onChange={(date) => setStartDate(date)}
                     placeholderText="Select Booking date"
+                    className="w-full focus-within:outline-none focus-within:first-letter:outline-none focus-within:bg-[#F5F5F5] bg-[#F5F5F5] h-10 rounded-md p-3 text-black"
                   />
                 </span>
               </Dialog.Title>

@@ -20,12 +20,15 @@ const Artisan = ({ id, username, location, skills, bio, is_available }) => {
 
         <div className="flex gap-2">
           <p className="rounded-full px-1 py-1 w-fit text-sm md:text-base flex items-center gap-1 capitalize">
-            <FaBriefcase fontSize={20} className="text-skyBlue900 pr-1" />
-            {skills.slice(0, 2).join(", ") || "N/A"}
+            <FaBriefcase
+              fontSize={20}
+              className="text-skyBlue900 pr-1 shrink-0"
+            />
+            {skills[0] || "N/A"}
           </p>
           <p className="text-gray-700 text-sm md:text-base leading-none md:leading-none mb-2 flex items-end gap-1">
             <CiLocationOn fontSize={20} className="text-skyBlue900" />
-            <span>{location?.name || "N/A"}</span>
+            <span className="capitalize">{location?.name || "N/A"}</span>
           </p>
         </div>
 

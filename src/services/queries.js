@@ -48,10 +48,10 @@ export function useGetArtisanBookings() {
 }
 
 //Client Side Endpoints
-export function useSearchArtisan() {
+export function useSearchArtisan(searchParams) {
   return useQuery({
-    queryKey: ["search-artisan"],
-    queryFn: () => searchArtisan(),
+    queryKey: ["search-artisan", searchParams],
+    queryFn: () => searchArtisan(searchParams),
   });
 }
 
