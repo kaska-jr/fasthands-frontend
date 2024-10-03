@@ -52,7 +52,7 @@ const collections = [
 const Gallery = () => {
   return (
     <div className="bg-white">
-      <Header text="Services Gallery" />
+      <Header text=" Gallery" />
       <main className="m-10 w-[90%] max-w-3xl mx-auto">
         <main className="m-10 w-[90%] max-w-3xl mx-auto flex flex-col justify-center items-center gap-10">
           <div className="text-2xl text-center">

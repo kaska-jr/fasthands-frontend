@@ -6,6 +6,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { useUpdateProfile } from "../../../services/mutation";
 import { Loader2 } from "lucide-react";
 import InputForm from "./components/InputForm";
+import { IoSearch } from "react-icons/io5";
 
 const Profile = () => {
   const [skill, setSkill] = useState("");
@@ -65,15 +66,12 @@ const Profile = () => {
   };
 
   const handleEnterKeyPress = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      if (skill && !ProfileData.skills.includes(skill)) {
-        setProfileData((prev) => ({
-          ...prev,
-          skills: [...prev.skills, skill],
-        }));
-        setSkill(""); // Clear the input field after adding the skill
-      }
+    if (skill && !ProfileData.skills.includes(skill)) {
+      setProfileData((prev) => ({
+        ...prev,
+        skills: [...prev.skills, skill],
+      }));
+      setSkill(""); // Clear the input field after adding the skill
     }
   };
 
@@ -132,7 +130,7 @@ const Profile = () => {
         />
 
         {/* SKILLS LIST */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center flex-wrap gap-2">
           {ProfileData?.skills?.map((skill, index) => (
             <div
               key={index}
@@ -148,15 +146,23 @@ const Profile = () => {
         </div>
 
         {/* SKILLS INPUT */}
-        <InputForm
-          label="Skills"
-          type="text"
-          name="skills"
-          value={skill}
-          onChange={handleSkillChange}
-          onKeyDown={handleEnterKeyPress}
-          placeholder={"Type skill and press Enter"}
-        />
+        <div className="flex items-end gap-2">
+          <InputForm
+            label="Skills"
+            type="text"
+            name="skills"
+            value={skill}
+            onChange={handleSkillChange}
+            placeholder={"Type skill and press Add"}
+          />
+          <button
+            type="button"
+            className="shadow-md flex justify-center items-center bg-skyBlue900 text-white h-10 w-10 rounded-full"
+            onClick={handleEnterKeyPress}
+          >
+            <span className="text-xl md:text-2xl  text-white right-3">+</span>
+          </button>
+        </div>
 
         {/* BIO */}
         <InputForm

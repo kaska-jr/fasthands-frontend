@@ -12,11 +12,12 @@ const ProfileInfo = ({ name, profession, profileImg }) => {
         />
         <FaCamera className="absolute bottom-0 right-3 cursor-pointer text-3xl text-[#2F2F2F]" />
       </div>
-      <div>
-        <h1 className="text-base lg:text-2xl font-bold">{name}</h1>
-        <div className="w-[70%]">
-          <p className="text-sm lg:text-lg ">{profession}</p>
-        </div>
+
+      <div className="w-full text-center">
+        <h1 className="text-base lg:text-2xl font-bold capitalize">
+          {name || ""}
+        </h1>
+        <p className="text-sm lg:text-lg capitalize">{profession || ""}</p>
       </div>
     </div>
   );
