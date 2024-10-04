@@ -23,9 +23,9 @@ const Artisan = () => {
             <img
               src="/mechanic.png"
               alt=""
-              className="rounded-full  h-28 w-28 md:h-40 md:w-40 object-cover"
+              className="rounded-full  h-28 w-28 md:h-40 md:w-40 object-cover shrink-0"
             />
-            <div className="flex-1 flex items-end justify-between">
+            <div className="flex-1 flex flex-col lg:flex-row items-start  lg:items-end gap-2 justify-between">
               <div className="flex flex-col gap-1">
                 <h1 className="text-2xl capitalize">{artisan?.username}</h1>
                 <h1 className="capitalize flex items-center gap-2">
@@ -80,7 +80,7 @@ const Artisan = () => {
           {/* SKILLS LIST */}
           <div className="border  rounded-md">
             <h1 className="text-xl p-2 ">Skills</h1>
-            <div className="flex items-center gap-2  border-t p-3 h-fit">
+            <div className="flex items-center gap-2  border-t p-3 h-fit flex-wrap">
               {artisan?.skills?.map((skill, index) => (
                 <div
                   key={index}
