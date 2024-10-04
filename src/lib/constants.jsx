@@ -41,6 +41,14 @@ export const locationOptions = [
     id: 2,
     name: "aba",
   },
+  {
+    id: 3,
+    name: "lagos",
+  },
+  {
+    id: 4,
+    name: "abuja",
+  },
 ];
 
 export const skillsOption = [

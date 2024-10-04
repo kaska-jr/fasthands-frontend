@@ -58,12 +58,12 @@ const SearchForm = ({ setArtisans, setIsLoading }) => {
           onSubmit={handleSubmit}
         >
           <div className="flex flex-col lg:flex-row justify-center items-center w-fit gap-6">
-            <div className="flex flex-col md:flex-row gap-5">
+            <div className="flex flex-col md:flex-row gap-5 px-4">
               <div>
                 <h1 className="text-lg text-gray-700 font-bold text-center lg:text-left">
                   Select Location
                 </h1>
-                <div className="flex gap-4">
+                <div className="flex gap-4 items-center flex-wrap">
                   {locationOptions.map((locationOption) => {
                     return (
                       <div

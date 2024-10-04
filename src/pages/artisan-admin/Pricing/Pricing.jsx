@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useGetArtisanPricing } from "../../../services/queries";
 import { FaTrashCan } from "react-icons/fa6";
 import { useDeleteService } from "../../../services/mutation";
+import { formatPriceInNaira } from "../../../lib/helpers";
 
 // const pricing = [
 //   {
@@ -92,7 +93,7 @@ const Pricing = () => {
                 <div className="flex flex-col md:flex-row">
                   <h1 className="font-bold w-48">Service Price</h1>
                   <div className="text-base font-semibold col-span-1 flex gap-9 items-center cursor-pointer max-w-xl flex-1">
-                    <span>${price}</span>
+                    <span>{formatPriceInNaira(price)}</span>
                     <div className="flex gap-1">
                       <Link to={`/artisan/service/${id}`}>
                         <div
