@@ -14,7 +14,6 @@ import { IoNotifications, IoSettingsOutline } from "react-icons/io5";
 const ArtisanLayout = () => {
   const dispatch = useDispatch();
   const { isNavBar } = useSelector((state) => state.toggleMenu);
-
   return (
     <div className={`flex h-screen flex-row`}>
       {/* NAVIGATION WRAPPER */}

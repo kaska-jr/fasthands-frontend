@@ -9,7 +9,7 @@ const NavigationLinks = [
   { id: 2, link: "/artisan/gallery", label: "gallery" },
   { id: 3, link: "/artisan/pricing", label: "Service" },
   { id: 7, link: "/artisan/bookings", label: "bookings" },
-  // { id: 4, link: "/artisan/schedule", label: "schedule" },
+  { id: 4, link: "/artisan/escrow", label: "escrow" },
   // { id: 5, link: "/artisan/history", label: "history" },
   // { id: 6, link: "/artisan/reviews", label: "reviews" },
 ];

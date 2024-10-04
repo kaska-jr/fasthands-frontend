@@ -21,6 +21,7 @@ export { default as Reviews } from "./artisan-admin/Review/Reviews";
 export { default as Schedule } from "./artisan-admin/Schedule/Schedule";
 export { default as Service } from "./artisan-admin/Service/Service";
 export { default as ArtisanBookings } from "./artisan-admin/Bookings/Bookings";
+export { default as ArtisanEscrow } from "./artisan-admin/Escrow/Escrow";
 
 //CLIENT PAGES
 export { default as ClientProfile } from "./client-admin/Profile/Profile";
@@ -28,3 +29,5 @@ export { default as SearchArtisan } from "./client-admin/SearchArtisan/SearchArt
 export { default as Messaging } from "./client-admin/Messaging/Messaging";
 export { default as Artisan } from "./client-admin/Artisan/Artisan";
 export { default as Bookings } from "./client-admin/Bookings/Bookings";
+export { default as Escrow } from "./client-admin/Escrow/Escrow";
+export { default as Commissions } from "./client-admin/Commissions/Commissions";

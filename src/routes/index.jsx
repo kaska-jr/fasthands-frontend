@@ -25,6 +25,9 @@ import {
   Artisan,
   Bookings,
   ArtisanBookings,
+  ArtisanEscrow,
+  Commissions,
+  Escrow,
 } from "../pages";
 import { ClientLayout, ArtisanLayout, HomeLayout } from "../layouts";
 import { Loading, NotFound } from "../components";
@@ -60,6 +63,7 @@ const AppRoutes = () => {
           <Route path="reviews" element={<Reviews />} />
           <Route path="bookings" element={<ArtisanBookings />} />
           <Route path="schedule" element={<Schedule />} />
+          <Route path="escrow" element={<ArtisanEscrow />} />
         </Route>
 
         <Route
@@ -71,6 +75,8 @@ const AppRoutes = () => {
           <Route path="profile-artisans/:artisanID" element={<Artisan />} />
           <Route path="chat/:id" element={<Messaging />} />
           <Route path="bookings" element={<Bookings />} />
+          <Route path="commissions" element={<Commissions />} />
+          <Route path="escrow" element={<Escrow />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
