@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useEffect } from "react";
 
 const SearchForm = ({ setArtisans, setIsLoading }) => {
-  const [location, setLocation] = useState("all");
+  const [location, setLocation] = useState("");
   const [skill, setSkill] = useState("");
   const [searchParams, setSearchParams] = useState({});
   const { data, isLoading, isSuccess } = useSearchArtisan(searchParams);
@@ -64,17 +64,17 @@ const SearchForm = ({ setArtisans, setIsLoading }) => {
                   Select Location
                 </h1>
                 <div className="flex gap-4">
-                  {locationOptions.map((location) => {
+                  {locationOptions.map((locationOption) => {
                     return (
                       <div
-                        key={location.id}
+                        key={locationOption.id}
                         className="flex items-center gap-2"
                       >
                         <input
                           type="radio"
-                          id="location"
+                          id={locationOption.name}
                           name="location"
-                          value={location.name}
+                          value={locationOption.name}
                           onChange={handleChange}
                           className="w-4 h-4 bg-white dark:bg-white appearance-none rounded-full border border-gray-200 checked:border-pink900 checked:ring checked:ring-skyBlue900 checked:bg-pink900 checked:hover:bg-pink900 checked:focus:bg-pink900"
                         />
@@ -82,7 +82,7 @@ const SearchForm = ({ setArtisans, setIsLoading }) => {
                           htmlFor={"location"}
                           className="text-gray-700 capitalize"
                         >
-                          {location.name}
+                          {locationOption.name}
                         </label>
                       </div>
                     );
